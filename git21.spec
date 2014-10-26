@@ -43,7 +43,7 @@
 %endif
 
 %global real_name git
-%global ius_suffix .19
+%global ius_suffix 21
 
 Name:           %{real_name}%{?ius_suffix}
 Version:        2.1.2
@@ -591,8 +591,10 @@ rm -rf %{buildroot}
 
 %changelog
 * Sun Oct 26 2014 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.1-0.1
-- Update to 2.x architecture
+- Update to 2.x architecture and git21 package name
 - Disable Patch05 libexec patch, already accepted upstream
+- Levave empty googlecode manual and html tarballs in place,
+  fill in when googlecode catches up with 2.1.2.
 
 * Wed Jun 18 2014 Carl George <carl.george@rackspace.com> - 1.8.5.5-4.ius
 - Allow git-subtree location to be determined from bin-man-doc-files
