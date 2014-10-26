@@ -46,7 +46,7 @@
 %global ius_suffix .19
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        1.9.0
+Version:        2.1.2
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
