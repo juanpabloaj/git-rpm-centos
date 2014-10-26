@@ -310,7 +310,8 @@ Conflicts:      emacs-git-el < %{version}
 %if %{emacs_old}
 %patch3 -p1
 %endif
-%patch5 -p1
+# libexecdir patch no longer needed
+#%patch5 -p1
 
 %if %{use_prebuilt_docs}
 mkdir -p prebuilt_docs/{html,man}
@@ -591,6 +592,8 @@ rm -rf %{buildroot}
 
 %changelog
 * Sun Oct 26 2014 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.1-0.1
+- Update to 2.x architecture
+- Disable Patch05 libexec patch, already accepted upstream
 
 * Wed Jun 18 2014 Carl George <carl.george@rackspace.com> - 1.8.5.5-4.ius
 - Allow git-subtree location to be determined from bin-man-doc-files
