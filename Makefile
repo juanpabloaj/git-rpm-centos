@@ -61,19 +61,7 @@ $(MOCKS):: verifyspec FORCE
 mock:: $(MOCKS)
 
 install:: $(MOCKS)
-	@for repo in $(MOCKS); do \
-	    echo Installing $$repo; \
-	    echo "$$repo" | awk -F- '{print $$2,$$3}' | while read yumrelease yumarch; do \
-		rpmdir=$(REPOBASEDIR)/$$yumrelease/$$yumarch; \
-		srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
-		echo "	Pusning SRPMS to $$srpmdir"; \
-		rsync $(RSYNCSAFEOPTS) $$repo/*.src.rpm $$srpmdir/. || exit 1; \
-		createrepo -q $$srpmdir/.; \
-		echo "	Pusning RPMS to $$rpmdir"; \
-		rsync $(RSYNCSAFEOPTS) --exclude=*.src.rpm --exclude=*debuginfo*.rpm $$repo/*.rpm $$rpmdir/. || exit 1; \
-		createrepo -q $$rpmdir/.; \
-	    done; \
-	done
+	@echo $@ not enabled
 
 clean::
 	rm -rf $(MOCKS)
