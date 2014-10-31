@@ -52,12 +52,14 @@ Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
 URL:            http://git-scm.com/
+# Actually built for 2.1.2 from tarball from complete upstream git repo
 Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
 Source2:        git-init.el
 Source3:        git.xinetd.in
 Source4:        git.conf.httpd
 Source5:        git-gui.desktop
 Source6:        gitweb.conf.in
+# Actually empty, place holder tarballs until googlecode repos available.
 Source10:       http://git-core.googlecode.com/files/%{real_name}-manpages-%{version}.tar.gz
 Source11:       http://git-core.googlecode.com/files/%{real_name}-htmldocs-%{version}.tar.gz
 Patch0:         git-1.5-gitweb-home-link.patch
@@ -590,10 +592,10 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
-* Sun Oct 26 2014 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.1-0.1
+* Thu Oct 30 2014 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.1-0.2
 - Update to 2.x architecture and git21 package name
 - Disable Patch05 libexec patch, already accepted upstream
-- Levave empty googlecode manual and html tarballs in place,
+- Use empty googlecode tarballsuntil googlecode available,
   fill in when googlecode catches up with 2.1.2.
 
 * Wed Jun 18 2014 Carl George <carl.george@rackspace.com> - 1.8.5.5-4.ius
