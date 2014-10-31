@@ -1,0 +1,15 @@
+SRPM tools for git 2.1.x
+
+This github repo includes tools for building git-2.1.x RPM's. It is
+based on the iuscommunity packages at
+http://dl.iuscommunity.org/pub/os/archive/CentOS/6/SRPMS/
+
+The primary tarball can be built from the git tag in the primary git repo at https://github.com/git/git. The secondary tarballs are empty and not curently used, they're place holders until the googlecode repo catches up.
+
+Download this git repo, download or build the tarballs, and run "make
+build" to build a local RPM. Run "make" to use "mock" to build the
+default designated RPM's in the local directory.
+
+       	  Nico Kadel-Garcia <nkadelgmail.com>
+
+	  
