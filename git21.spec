@@ -25,7 +25,6 @@
 %global emacs_old           0
 %global docbook_suppress_sp 0
 %global enable_ipv6         0
-%global use_prebuilt_docs   0
 %global filter_yaml_any     0
 %endif
 
@@ -42,18 +41,28 @@
 %global use_systemd         0
 %endif
 
+# EL-6+ can now handle htmldocs
+%if 0%{?fedora} >= 19 || 0%{?rhel} >= 6
+%global use_prebuilt_docs   0
+%else
+%global use_prebuilt_docs   1
+%endif
+
 %global real_name git
 %global ius_suffix 21
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.1.2
+Version:        2.1.4
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
-URL:            http://git-scm.com/
-# Actually built for 2.1.2 from tarball from complete upstream git repo
-Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
+URL: 		http://kernel.org/pub/software/scm/git/
+Source: 	http://kernel.org/pub/software/scm/git/%{name}-%{version}.tar.gz
+#Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
+# Actually built for 2.1.4 from tarball from complete upstream git repo
+# git archive --format=tar.gz  --prefix=git-2.1.4/ v2.1.4  > ../git-2.1.4.tar.gz
+Source0:        %{real_name}-%{version}.tar.gz
 Source2:        git-init.el
 Source3:        git.xinetd.in
 Source4:        git.conf.httpd
@@ -592,6 +601,10 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
+* Sun May 17 2015 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.4-0.1
+- Udpate to 2.1.4
+- Build htmldocs on EL6+
+
 * Thu Oct 30 2014 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.1-0.2
 - Update to 2.x architecture and git21 package name
 - Disable Patch05 libexec patch, already accepted upstream
