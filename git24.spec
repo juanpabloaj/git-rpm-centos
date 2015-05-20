@@ -1,12 +1,15 @@
 # Pass --without docs to rpmbuild if you don't want the documentation
 
+# Always use prebuilt docs, they only compile with RHEL 6 or better, they're
+# always available and otherwise add profound delays to compilation
+%global use_prebuilt_docs   1
+
 # Settings for EL-5
 # - Leave git-* binaries in %{_bindir}
 # - Don't use noarch subpackages
 # - Use proper libcurl devel package
 # - Patch emacs and tweak docbook spaces
 # - Explicitly enable ipv6 for git-daemon
-# - Use prebuilt documentation, asciidoc is too old
 # - Define missing python macro
 %if 0%{?rhel} && 0%{?rhel} <= 5
 %global gitcoredir          %{_bindir}
@@ -15,7 +18,6 @@
 %global emacs_old           1
 %global docbook_suppress_sp 1
 %global enable_ipv6         1
-%global use_prebuilt_docs   1
 %global filter_yaml_any     1
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 %else
@@ -41,36 +43,32 @@
 %global use_systemd         0
 %endif
 
-# EL-6+ can now handle htmldocs
-%if 0%{?fedora} >= 19 || 0%{?rhel} >= 6
-%global use_prebuilt_docs   0
-%else
-%global use_prebuilt_docs   1
-%endif
-
 %global real_name git
-%global ius_suffix 21
+%global ius_suffix 24
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.1.4
+Version:        2.4.1
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
 URL: 		http://kernel.org/pub/software/scm/git/
-Source: 	http://kernel.org/pub/software/scm/git/%{name}-%{version}.tar.gz
 #Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
-# Actually built for 2.1.4 from tarball from complete upstream git repo
-# git archive --format=tar.gz  --prefix=git-2.1.4/ v2.1.4  > ../git-2.1.4.tar.gz
-Source0:        %{real_name}-%{version}.tar.gz
+Source: 	http://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
+# Actually built for 2.4.1 from tarball from complete upstream git repo
+# git archive --format=tar.gz  --prefix=git-2.4.1/ v2.4.1  > ../git-2.4.1.tar.gz
 Source2:        git-init.el
 Source3:        git.xinetd.in
 Source4:        git.conf.httpd
 Source5:        git-gui.desktop
 Source6:        gitweb.conf.in
-# Actually empty, place holder tarballs until googlecode repos available.
-Source10:       http://git-core.googlecode.com/files/%{real_name}-manpages-%{version}.tar.gz
-Source11:       http://git-core.googlecode.com/files/%{real_name}-htmldocs-%{version}.tar.gz
+#Source10:       http://git-core.googlecode.com/files/%{real_name}-manpages-%{version}.tar.gz
+#Source11:       http://git-core.googlecode.com/files/%{real_name}-htmldocs-%{version}.tar.gz
+# Built from upstream git repo to ease local compilation
+# Use 'git checkout v[tag]; autoconf; ./configure; make dist-docs'
+Source10:       %{real_name}-manpages-%{version}.tar.gz
+Source11:       %{real_name}-htmldocs-%{version}.tar.gz
+
 Patch0:         git-1.5-gitweb-home-link.patch
 # https://bugzilla.redhat.com/490602
 Patch1:         git-cvsimport-Ignore-cvsps-2.2b1-Branches-output.patch
@@ -601,9 +599,13 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
-* Sun May 17 2015 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.4-0.1
+* Tue May 19 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.4.1-0.1
+- Update to 2.4.1
+- Document creation of docs tarball
+
+* Sun May 17 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.1.4-0.1
 - Udpate to 2.1.4
-- Build htmldocs on EL6+
+- Set prebuilt docs to be default, even though now compile on EL6+.
 
 * Thu Oct 30 2014 Nico KAdel-Garcia <nkadel@gmail.com> - 2.1.1-0.2
 - Update to 2.x architecture and git21 package name
