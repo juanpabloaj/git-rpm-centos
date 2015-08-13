@@ -53,7 +53,6 @@ Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
 URL: 		http://kernel.org/pub/software/scm/git/
-#Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
 Source: 	http://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
 # Actually built for 2.4.1 from tarball from complete upstream git repo
 # git archive --format=tar.gz  --prefix=git-2.4.1/ v2.4.1  > ../git-2.4.1.tar.gz
@@ -62,12 +61,8 @@ Source3:        git.xinetd.in
 Source4:        git.conf.httpd
 Source5:        git-gui.desktop
 Source6:        gitweb.conf.in
-#Source10:       http://git-core.googlecode.com/files/%{real_name}-manpages-%{version}.tar.gz
-#Source11:       http://git-core.googlecode.com/files/%{real_name}-htmldocs-%{version}.tar.gz
-# Built from upstream git repo to ease local compilation
-# Use 'git checkout v[tag]; autoconf; ./configure; make dist-docs'
-Source10:       %{real_name}-manpages-%{version}.tar.gz
-Source11:       %{real_name}-htmldocs-%{version}.tar.gz
+Source10: 	http://kernel.org/pub/software/scm/git/%{real_name}-manpages-%{version}.tar.gz
+Source11: 	http://kernel.org/pub/software/scm/git/%{real_name}-htmldocs-%{version}.tar.gz
 
 Patch0:         git-1.5-gitweb-home-link.patch
 # https://bugzilla.redhat.com/490602
@@ -601,6 +596,7 @@ rm -rf %{buildroot}
 %changelog
 * Thu Aug 13 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.1
 - Update to 2.5.0
+- Point "Source" entries to canonical http://mirrors.kernel.org repos
 
 * Tue May 19 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.4.1-0.1
 - Update to 2.4.1
