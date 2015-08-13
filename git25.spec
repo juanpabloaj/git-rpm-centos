@@ -44,10 +44,10 @@
 %endif
 
 %global real_name git
-%global ius_suffix 24
+%global ius_suffix 25
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.4.1
+Version:        2.5.0
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
@@ -599,6 +599,9 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
+* Thu Aug 13 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.1
+- Update to 2.5.0
+
 * Tue May 19 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.4.1-0.1
 - Update to 2.4.1
 - Document creation of docs tarball
