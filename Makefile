@@ -19,30 +19,23 @@ MOCKS+=epel-5-x86_64
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"
 
-# Deduce local package names and .spec files, for universe Makefile use
-SPEC := `ls *.spec | head -1`
-PKGNAME := "`ls *.spec | head -1 | sed 's/.spec$$//g'`"
+SPEC:="`ls *.spec`"
+all:: $(MOCKS)
 
-all:: verifyspec $(MOCKS)
-
-# Oddness to get deduced .spec file verified
-verifyspec:: FORCE
-	@if [ ! -e $(SPEC) ]; then \
-	    echo Error: SPEC file $(SPEC) not found, exiting; \
-	    exit 1; \
-	fi
-
-srpm:: verifyspec FORCE
+srpm:: FORCE
 	@echo "Building $(SPEC) SRPM"
-	rm -f $(PKGNAME)*.src.rpm
-	rpmbuild --define '_sourcedir $(PWD)' \
-		--define '_srcrpmdir $(PWD)' \
+	rm -rf rpmbuild
+	rpmbuild \
+		--define '_topdir $(PWD)/rpmbuild' \
+		--define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
 
 build:: srpm FORCE
-	rpmbuild --rebuild `ls *.src.rpm | grep -v ^epel-`
+	rpmbuild \
+		--define '_topdir $(PWD)/rpmbuild' \
+		--rebuild rpmbuild/SRPMS/*.src.rpm
 
-$(MOCKS):: verifyspec FORCE
+$(MOCKS):: FORCE
 	@if [ -n "`find $@ -name \*.rpm ! -name \*.src.rpm 2>/dev/null`" ]; then \
 		echo "	Skipping $(SPEC) in $@ with RPMS"; \
 	else \
