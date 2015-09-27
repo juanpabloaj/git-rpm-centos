@@ -48,7 +48,7 @@
 
 Name:           %{real_name}%{?ius_suffix}
 Version:        2.5.0
-Release:        0.1.ius%{?dist}
+Release:        0.2.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
@@ -119,7 +119,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       git-cvs = %{version}-%{release}
 Requires:       git-email = %{version}-%{release}
 Requires:       git-gui = %{version}-%{release}
@@ -141,7 +141,7 @@ This is a dummy package which brings in all subpackages.
 %package daemon
 Summary:        Git protocol dæmon
 Group:          Development/Tools
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       xinetd
 Provides:       git-daemon = %{version}-%{release}                                    
 Provides:       git-daemon%{?_isa} = %{version}-%{release}
@@ -156,7 +156,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Provides:       gitweb = %{version}-%{release}                                    
 Provides:       config(gitweb) = %{version}-%{release}                                    
 Conflicts:      gitweb < %{version}
@@ -171,7 +171,7 @@ Group:          Development/Tools
 BuildArch:      noarch
 %endif
 BuildRequires:  python
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Provides:       git-p4 = %{version}-%{release}                                    
 Conflicts:      git-p4 < %{version}
 %description p4
@@ -180,7 +180,8 @@ Conflicts:      git-p4 < %{version}
 %package svn
 Summary:        Git tools for importing Subversion repositories
 Group:          Development/Tools
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       subversion
 Requires:       perl(Term::ReadKey)
 Provides:       git-svn = %{version}-%{release}                                    
@@ -195,7 +196,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       cvs
 Requires:       cvsps
 Requires:       perl-DBD-SQLite
@@ -210,7 +211,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       perl-Git%{?ius_suffix} = %{version}-%{release}
 Requires:       perl(Authen::SASL)
 Requires:       perl(Net::SMTP::SSL)
@@ -225,7 +226,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       tk >= 8.4
 Requires:       gitk = %{version}-%{release}
 Provides:       git-gui = %{version}-%{release}                                    
@@ -239,7 +240,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       tk >= 8.4
 Provides:       gitk = %{version}-%{release}                                    
 Conflicts:      gitk < %{version}
@@ -252,7 +253,7 @@ Group:          Development/Libraries
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 BuildRequires:  perl(Error)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(Error)
@@ -269,7 +270,7 @@ Group:          Development/Libraries
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Provides:       perl-Git-SVN = %{version}-%{release}                                        
 Conflicts:      perl-Git-SVN < %{version}
@@ -280,7 +281,7 @@ Perl interface to Git.
 %package -n emacs-git%{?ius_suffix}
 Summary:        Git version control system support for Emacs
 Group:          Applications/Editors
-Requires:       git = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Provides:       emacs-git = %{version}-%{release}                                        
 Conflicts:      emacs-git < %{version}
 %if %{noarch_sub}
@@ -594,6 +595,10 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
+* Sun Sep 27 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.2
+- Update Requires to use actual git25 package name, not just "git", to
+  avoid overlaps.
+
 * Thu Aug 13 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.1
 - Update to 2.5.0
 - Point "Source" entries to canonical http://mirrors.kernel.org repos
