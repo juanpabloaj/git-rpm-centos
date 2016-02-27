@@ -1,6 +1,6 @@
-SRPM tools for git 2.4.x
+SRPM tools for git 2.7.x
 
-This github repo includes tools for building git-2.4.x RPM's. It is
+This github repo includes tools for building git-2.7.x RPM's. It is
 based on the iuscommunity packages at
 http://dl.iuscommunity.org/pub/os/archive/CentOS/6/SRPMS/. 
 
@@ -19,10 +19,11 @@ using:
 	  ./configure
 	  make dist-doc
 	  
-The originally used googlecode repository for these is badly out of
-date and should no longer be used. The selection to build or not build
-the documentation from the source is also disabled: it triples
-compilation time to no good purpose.
+The googlecode repository for these prevoiusly used by iusrelease is
+out of date date and should be discarded. The selection to build or
+not build the documentation from the source is also disabled: it
+triples compilation time to no good purpose. Intead, use the canonical
+documentaion from http://kernel.org/
 
        	  Nico Kadel-Garcia <nkadelgmail.com>
 
