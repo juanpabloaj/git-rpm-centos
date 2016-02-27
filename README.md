@@ -14,10 +14,10 @@ The primary tarball can be built from the git tag in the primary git
 repo at https://github.com/git/git. The secondary tarballs can be built by
 using:
 
-          git clean -x -d -f
-	  autoconf
-	  ./configure
-	  make dist-doc
+	git clean -x -d -f
+	autoconf
+	./configure
+	make dist-doc
 	  
 The googlecode repository for these prevoiusly used by iusrelease is
 out of date date and should be discarded. The selection to build or
