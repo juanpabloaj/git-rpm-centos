@@ -44,11 +44,11 @@
 %endif
 
 %global real_name git
-%global ius_suffix 25
+%global ius_suffix 27
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.5.0
-Release:        0.2.ius%{?dist}
+Version:        2.7.2
+Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
@@ -595,6 +595,9 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
+* Sat Feb 27 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 2.7.2-0.1
+- Update to 2.7.2
+
 * Sun Sep 27 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.2
 - Update Requires to use actual git25 package name, not just "git", to
   avoid overlaps.
