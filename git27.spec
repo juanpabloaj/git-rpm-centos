@@ -52,10 +52,8 @@ Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
-URL: 		http://kernel.org/pub/software/scm/git/
-Source: 	http://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
-# Actually built for 2.4.1 from tarball from complete upstream git repo
-# git archive --format=tar.gz  --prefix=git-2.4.1/ v2.4.1  > ../git-2.4.1.tar.gz
+URL: 		https://kernel.org/pub/software/scm/git/
+Source: 	https://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
 Source2:        git-init.el
 Source3:        git.xinetd.in
 Source4:        git.conf.httpd
