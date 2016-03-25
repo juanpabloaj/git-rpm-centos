@@ -20,29 +20,24 @@ MOCKS+=epel-5-x86_64
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"
 
 # Deduce local package names and .spec files, for universe Makefile use
-SPEC := `ls *.spec | head -1`
 PKGNAME := "`ls *.spec | head -1 | sed 's/.spec$$//g'`"
 
-all:: verifyspec $(MOCKS)
+all:: $(MOCKS)
 
-# Oddness to get deduced .spec file verified
-verifyspec:: FORCE
-	@if [ ! -e $(SPEC) ]; then \
-	    echo Error: SPEC file $(SPEC) not found, exiting; \
-	    exit 1; \
-	fi
-
-srpm:: verifyspec FORCE
-	@echo "Building $(SPEC) SRPM"
-	rm -f $(PKGNAME)*.src.rpm
-	rpmbuild --define '_sourcedir $(PWD)' \
-		--define '_srcrpmdir $(PWD)' \
-		-bs $(SPEC) --nodeps
+srpm:: FORCE
+	@echo Building *.spec SRPM
+	rm -rf rpmbuild
+	rpmbuild \
+		--define '_topdir $(PWD)/rpmbuild' \
+		--define '_sourcedir $(PWD)' \
+		-bs *.spec --nodeps
 
 build:: srpm FORCE
-	rpmbuild --rebuild `ls *.src.rpm | grep -v ^epel-`
+	rpmbuild \
+		--define "_topdir $(PWD)/rpmbuild" \
+		--rebuild rpmbuild/SRPMS/*.src.rpm
 
-$(MOCKS):: verifyspec FORCE
+$(MOCKS):: FORCE
 	@if [ -n "`find $@ -name \*.rpm ! -name \*.src.rpm 2>/dev/null`" ]; then \
 		echo "	Skipping $(SPEC) in $@ with RPMS"; \
 	else \
@@ -50,7 +45,7 @@ $(MOCKS):: verifyspec FORCE
 		rm -rf $@; \
 		/usr/bin/mock -q -r $@ --sources=$(PWD) \
 		    --resultdir=$(PWD)/$@ \
-		    --buildsrpm --spec=$(SPEC); \
+		    --buildsrpm --spec=*.spec; \
 		echo "Storing " $@/*.src.rpm "as $@.src.rpm"; \
 		/bin/mv $@/*.src.rpm $@.src.rpm; \
 		echo "Building $@.src.rpm in $@"; \
@@ -67,6 +62,7 @@ install:: $(MOCKS)
 
 clean::
 	rm -rf $(MOCKS)
+	rm -rf rpmbuild
 
 realclean distclean:: clean
 	rm -f *.src.rpm

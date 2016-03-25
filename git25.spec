@@ -47,7 +47,7 @@
 %global ius_suffix 24
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.4.1
+Version:        2.5.0
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
