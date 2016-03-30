@@ -44,17 +44,17 @@
 %endif
 
 %global real_name git
-%global ius_suffix 24
+%global ius_suffix 28
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.5.0
+Version:        2.8.0
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
 URL: 		http://kernel.org/pub/software/scm/git/
 #Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
-Source: 	http://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
+Source: 	https://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
 # Actually built for 2.4.1 from tarball from complete upstream git repo
 # git archive --format=tar.gz  --prefix=git-2.4.1/ v2.4.1  > ../git-2.4.1.tar.gz
 Source2:        git-init.el
@@ -504,7 +504,7 @@ rm -rf %{buildroot}
 %files -f bin-man-doc-files
 %defattr(-,root,root)
 %{_datadir}/git-core/
-%doc README COPYING Documentation/*.txt Documentation/RelNotes contrib/
+%doc README.md COPYING Documentation/*.txt Documentation/RelNotes contrib/
 %{!?_without_docs: %doc Documentation/*.html Documentation/docbook-xsl.css}
 %{!?_without_docs: %doc Documentation/howto Documentation/technical}
 %{_sysconfdir}/bash_completion.d
@@ -599,6 +599,10 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
+* Wed Mar 30 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 2.8.0-0.1
+- Update to 2.8.0
+- Reset REAMDE to README.md doc file
+
 * Tue May 19 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.4.1-0.1
 - Update to 2.4.1
 - Document creation of docs tarball
