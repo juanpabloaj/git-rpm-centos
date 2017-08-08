@@ -44,23 +44,23 @@
 %endif
 
 %global real_name git
-%global ius_suffix 27
+%global ius_suffix 214
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.7.2
+Version:        2.14.0
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
-URL: 		https://kernel.org/pub/software/scm/git/
+URL: 		http://kernel.org/pub/software/scm/git/
 Source: 	https://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
 Source2:        git-init.el
 Source3:        git.xinetd.in
 Source4:        git.conf.httpd
 Source5:        git-gui.desktop
 Source6:        gitweb.conf.in
-Source10: 	http://kernel.org/pub/software/scm/git/%{real_name}-manpages-%{version}.tar.gz
-Source11: 	http://kernel.org/pub/software/scm/git/%{real_name}-htmldocs-%{version}.tar.gz
+Source10:       https://kernel.org/pub/software/scm/git/%{real_name}-manpages-%{version}.tar.gz
+Source11:       https://kernel.org/pub/software/scm/git/%{real_name}-htmldocs-%{version}.tar.gz
 
 Patch0:         git-1.5-gitweb-home-link.patch
 # https://bugzilla.redhat.com/490602
@@ -117,7 +117,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       git-cvs = %{version}-%{release}
 Requires:       git-email = %{version}-%{release}
 Requires:       git-gui = %{version}-%{release}
@@ -139,7 +139,7 @@ This is a dummy package which brings in all subpackages.
 %package daemon
 Summary:        Git protocol dæmon
 Group:          Development/Tools
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       xinetd
 Provides:       git-daemon = %{version}-%{release}                                    
 Provides:       git-daemon%{?_isa} = %{version}-%{release}
@@ -154,7 +154,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Provides:       gitweb = %{version}-%{release}                                    
 Provides:       config(gitweb) = %{version}-%{release}                                    
 Conflicts:      gitweb < %{version}
@@ -169,7 +169,7 @@ Group:          Development/Tools
 BuildArch:      noarch
 %endif
 BuildRequires:  python
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Provides:       git-p4 = %{version}-%{release}                                    
 Conflicts:      git-p4 < %{version}
 %description p4
@@ -178,8 +178,7 @@ Conflicts:      git-p4 < %{version}
 %package svn
 Summary:        Git tools for importing Subversion repositories
 Group:          Development/Tools
-Requires:       %{name} = %{version}-%{release}
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       subversion
 Requires:       perl(Term::ReadKey)
 Provides:       git-svn = %{version}-%{release}                                    
@@ -194,7 +193,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       cvs
 Requires:       cvsps
 Requires:       perl-DBD-SQLite
@@ -209,7 +208,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       perl-Git%{?ius_suffix} = %{version}-%{release}
 Requires:       perl(Authen::SASL)
 Requires:       perl(Net::SMTP::SSL)
@@ -224,7 +223,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       tk >= 8.4
 Requires:       gitk = %{version}-%{release}
 Provides:       git-gui = %{version}-%{release}                                    
@@ -238,7 +237,7 @@ Group:          Development/Tools
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       tk >= 8.4
 Provides:       gitk = %{version}-%{release}                                    
 Conflicts:      gitk < %{version}
@@ -251,7 +250,7 @@ Group:          Development/Libraries
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 BuildRequires:  perl(Error)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(Error)
@@ -268,7 +267,7 @@ Group:          Development/Libraries
 %if %{noarch_sub}
 BuildArch:      noarch
 %endif
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Provides:       perl-Git-SVN = %{version}-%{release}                                        
 Conflicts:      perl-Git-SVN < %{version}
@@ -279,7 +278,7 @@ Perl interface to Git.
 %package -n emacs-git%{?ius_suffix}
 Summary:        Git version control system support for Emacs
 Group:          Applications/Editors
-Requires:       %{name} = %{version}-%{release}
+Requires:       git = %{version}-%{release}
 Provides:       emacs-git = %{version}-%{release}                                        
 Conflicts:      emacs-git < %{version}
 %if %{noarch_sub}
@@ -498,7 +497,7 @@ rm -rf %{buildroot}
 %files -f bin-man-doc-files
 %defattr(-,root,root)
 %{_datadir}/git-core/
-%doc README COPYING Documentation/*.txt Documentation/RelNotes contrib/
+%doc README.md COPYING Documentation/*.txt Documentation/RelNotes contrib/
 %{!?_without_docs: %doc Documentation/*.html Documentation/docbook-xsl.css}
 %{!?_without_docs: %doc Documentation/howto Documentation/technical}
 %{_sysconfdir}/bash_completion.d
@@ -593,16 +592,9 @@ rm -rf %{buildroot}
 # No files for you!
 
 %changelog
-* Sat Feb 27 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 2.7.2-0.1
-- Update to 2.7.2
-
-* Sun Sep 27 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.2
-- Update Requires to use actual git25 package name, not just "git", to
-  avoid overlaps.
-
-* Thu Aug 13 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.5.0-0.1
-- Update to 2.5.0
-- Point "Source" entries to canonical http://mirrors.kernel.org repos
+* Wed Mar 30 2016 Nico Kadel-Garcia <nkadel@gmail.com> - 2.8.0-0.1
+- Update to 2.8.0
+- Reset REAMDE to README.md doc file
 
 * Tue May 19 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 2.4.1-0.1
 - Update to 2.4.1

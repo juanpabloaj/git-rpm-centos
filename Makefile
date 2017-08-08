@@ -11,20 +11,23 @@ RSYNCOPTS=-a --no-owner --no-group
 RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing 
 
 # "mock" configurations to build with, activate only as needed
+#MOCKS+=fedora-26-i386
+#MOCKS+=epel-7-i386x86_64
 #MOCKS+=epel-6-i386
-#MOCKS+=epel-5-i386
+
+MOCKS+=fedora-26-x86_64
 MOCKS+=epel-7-x86_64
 MOCKS+=epel-6-x86_64
-MOCKS+=epel-5-x86_64
+
+SPEC = `ls *.spec`
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"
 
-SPEC:="`ls *.spec`"
 all:: $(MOCKS)
 
 srpm:: FORCE
-	@echo "Building $(SPEC) SRPM"
+	@echo Building $(SPEC) SRPM
 	rm -rf rpmbuild
 	rpmbuild \
 		--define '_topdir $(PWD)/rpmbuild' \
@@ -33,7 +36,7 @@ srpm:: FORCE
 
 build:: srpm FORCE
 	rpmbuild \
-		--define '_topdir $(PWD)/rpmbuild' \
+		--define "_topdir $(PWD)/rpmbuild" \
 		--rebuild rpmbuild/SRPMS/*.src.rpm
 
 $(MOCKS):: FORCE
