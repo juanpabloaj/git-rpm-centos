@@ -1,6 +1,6 @@
-SRPM tools for git 2.4.x
+SRPM tools for git 2.9.x
 
-This github repo includes tools for building git-2.4.x RPM's. It is
+This github repo includes tools for building git-2.9.x RPM's. It is
 based on the iuscommunity packages at
 http://dl.iuscommunity.org/pub/os/archive/CentOS/6/SRPMS/. 
 
