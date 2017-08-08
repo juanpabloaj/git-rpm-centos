@@ -44,30 +44,23 @@
 %endif
 
 %global real_name git
-%global ius_suffix 28
+%global ius_suffix 214
 
 Name:           %{real_name}%{?ius_suffix}
-Version:        2.8.0
+Version:        2.14.0
 Release:        0.1.ius%{?dist}
 Summary:        Fast Version Control System
 License:        GPLv2
 Group:          Development/Tools
 URL: 		http://kernel.org/pub/software/scm/git/
-#Source0:        http://git-core.googlecode.com/files/%{real_name}-%{version}.tar.gz
 Source: 	https://kernel.org/pub/software/scm/git/%{real_name}-%{version}.tar.gz
-# Actually built for 2.4.1 from tarball from complete upstream git repo
-# git archive --format=tar.gz  --prefix=git-2.4.1/ v2.4.1  > ../git-2.4.1.tar.gz
 Source2:        git-init.el
 Source3:        git.xinetd.in
 Source4:        git.conf.httpd
 Source5:        git-gui.desktop
 Source6:        gitweb.conf.in
-#Source10:       http://git-core.googlecode.com/files/%{real_name}-manpages-%{version}.tar.gz
-#Source11:       http://git-core.googlecode.com/files/%{real_name}-htmldocs-%{version}.tar.gz
-# Built from upstream git repo to ease local compilation
-# Use 'git checkout v[tag]; autoconf; ./configure; make dist-docs'
-Source10:       %{real_name}-manpages-%{version}.tar.gz
-Source11:       %{real_name}-htmldocs-%{version}.tar.gz
+Source10:       https://kernel.org/pub/software/scm/git/%{real_name}-manpages-%{version}.tar.gz
+Source11:       https://kernel.org/pub/software/scm/git/%{real_name}-htmldocs-%{version}.tar.gz
 
 Patch0:         git-1.5-gitweb-home-link.patch
 # https://bugzilla.redhat.com/490602

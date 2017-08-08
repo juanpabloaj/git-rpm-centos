@@ -16,11 +16,10 @@ RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing
 MOCKS+=epel-6-x86_64
 MOCKS+=epel-5-x86_64
 
+SPEC = `ls *.spec`
+
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"
-
-# Deduce local package names and .spec files, for universe Makefile use
-PKGNAME := "`ls *.spec | head -1 | sed 's/.spec$$//g'`"
 
 all:: $(MOCKS)
 
@@ -30,7 +29,7 @@ srpm:: FORCE
 	rpmbuild \
 		--define '_topdir $(PWD)/rpmbuild' \
 		--define '_sourcedir $(PWD)' \
-		-bs *.spec --nodeps
+		-bs $(SPEC) --nodeps
 
 build:: srpm FORCE
 	rpmbuild \
@@ -45,7 +44,7 @@ $(MOCKS):: FORCE
 		rm -rf $@; \
 		/usr/bin/mock -q -r $@ --sources=$(PWD) \
 		    --resultdir=$(PWD)/$@ \
-		    --buildsrpm --spec=*.spec; \
+		    --buildsrpm --spec=$(SPEC); \
 		echo "Storing " $@/*.src.rpm "as $@.src.rpm"; \
 		/bin/mv $@/*.src.rpm $@.src.rpm; \
 		echo "Building $@.src.rpm in $@"; \
