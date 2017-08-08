@@ -11,10 +11,11 @@ RSYNCOPTS=-a --no-owner --no-group
 RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing 
 
 # "mock" configurations to build with, activate only as needed
+#MOCKS+=epel-7-i386x86_64
 #MOCKS+=epel-6-i386
-#MOCKS+=epel-5-i386
+
+MOCKS+=epel-7-x86_64
 MOCKS+=epel-6-x86_64
-MOCKS+=epel-5-x86_64
 
 SPEC = `ls *.spec`
 
