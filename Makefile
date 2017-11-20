@@ -34,7 +34,13 @@ srpm:: FORCE
 		--define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
 
-build:: srpm FORCE
+wget:
+	wget https://www.kernel.org/pub/software/scm/git/git-2.14.0.tar.gz
+	wget https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.14.0.tar.gz
+	wget https://www.kernel.org/pub/software/scm/git/git-manpages-2.14.0.tar.gz
+
+
+build:: wget srpm FORCE
 	rpmbuild \
 		--define "_topdir $(PWD)/rpmbuild" \
 		--rebuild rpmbuild/SRPMS/*.src.rpm
