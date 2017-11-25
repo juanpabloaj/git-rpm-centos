@@ -1,0 +1,5 @@
+version: '3'
+services:
+  git-rpmbuild-centos6:
+    build: .
+    image: git-rpmbuild-centos6
