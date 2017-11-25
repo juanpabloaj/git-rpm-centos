@@ -1,4 +1,4 @@
-## Centos RPM for git 2.x
+## git 2.x RPM for Centos
 
 ### TLDR
 
