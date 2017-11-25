@@ -4,4 +4,10 @@
 
     make build
 
+Or
+
+    docker-compose build
+
+And copy the RPMs out of the container
+
 Based on https://github.com/nkadel/git29-srpm
