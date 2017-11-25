@@ -1,4 +1,8 @@
-SRPM tools for git 2.9.x
+## SRPM tools for git 2.x
+
+### TLDR
+
+    make build
 
 This github repo includes tools for building git-2.9.x RPM's. It is
 based on the iuscommunity packages at
