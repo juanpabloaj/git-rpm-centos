@@ -1,5 +1,12 @@
 version: '3'
 services:
   git-rpmbuild-centos6:
-    build: .
+    build:
+        context: .
+        dockerfile: centos6/Dockerfile
     image: git-rpmbuild-centos6
+  git-rpmbuild-centos7:
+    build:
+        context: .
+        dockerfile: centos7/Dockerfile
+    image: git-rpmbuild-centos7
